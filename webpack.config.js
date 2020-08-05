@@ -21,9 +21,9 @@ module.exports = (env = {}) => {
     ];
     if (isProd) {
       plugins.push(
-        new MiniCssExtractPlugin({
-          filename: 'main-[hash:8].css',
-        })
+          new MiniCssExtractPlugin({
+            filename: 'main-[hash:8].css',
+          })
       );
     }
     return plugins;
@@ -34,6 +34,7 @@ module.exports = (env = {}) => {
     output: {
       filename: isProd ? 'main-[hash:8].js' : undefined,
     },
+    devtool: 'source-map',
     module: {
       rules: [
         {
@@ -45,6 +46,10 @@ module.exports = (env = {}) => {
         {
           test: /\.css$/i,
           use: getStyleLoaders(),
+        },
+        {
+          test: /\.svg$/i,
+          loader: '@svgr/webpack',
         },
         {
           test: /\.s[ac]ss$/i,
