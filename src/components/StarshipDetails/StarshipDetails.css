@@ -1,0 +1,11 @@
+.content-block {
+    background-color: #303030;
+    border-radius: 5px;
+}
+
+
+.item-image {
+    height: 200px;
+    width: auto;
+    border-radius: 10px;
+}

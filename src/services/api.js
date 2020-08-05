@@ -2,7 +2,7 @@ export default class SwapiService {
 
     _apiBaseUrl = 'https://swapi.dev/api';
 
-    async getResource(url) {
+    getResource = async (url) => {
         const responce = await fetch(`${this._apiBaseUrl}${url}`);
         if (!responce.ok) {
             throw new Error(`Could not fetch ${url} ,received ${responce.status}`);
@@ -10,38 +10,43 @@ export default class SwapiService {
         return await responce.json();
     }
 
-    async getAllPeople() {
+    getAllPeople = async () => {
         const responce = await this.getResource(`/people/`);
-        return responce.results.map((this._transformPlanet));
+        return responce.results;
     }
 
-    async getAllPlanets() {
+    getAllPlanets = async () => {
         const responce = await this.getResource(`/planets/`);
         return responce.results;
     }
 
-    async getPerson(id) {
+    getAllStarships = async () => {
+        const responce = await this.getResource(`/starships/`);
+        return responce.results;
+    }
+
+    getPerson = async (id) => {
         const person = await this.getResource(`/people/${id}`);
         return this._transformPerson(person);
     }
 
-    async getStarship(id) {
-        const starship = await this.getResource(`/starship/${id}`);
+    getStarship = async (id) => {
+        const starship = await this.getResource(`/starships/${id}`);
         return this._transformStarship(starship);
     }
 
-    async getPlanet(id) {
+    getPlanet = async (id) => {
         const planet = await this.getResource(`/planets/${id}`);
         const imageUrl = `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`;
         return this._transformPlanet(planet, imageUrl);
     }
 
-    _extractId(item) {
+    _extractId = (item) => {
         const idRegExp = /\/([0-9]*)\/$/;
         return item.url.match(idRegExp)[1];
     }
 
-    _transformPlanet(planet, imageUrl) {
+    _transformPlanet = (planet, imageUrl) => {
         return {
             id: this._extractId(planet),
             image: imageUrl,
@@ -52,7 +57,7 @@ export default class SwapiService {
         }
     }
 
-    _transformStarship(starship) {
+    _transformStarship = (starship) => {
         return {
             id: this._extractId(starship),
             name: starship.name,
@@ -66,7 +71,7 @@ export default class SwapiService {
         }
     }
 
-    _transformPerson(person) {
+    _transformPerson = (person) => {
         return {
             id: this._extractId(person),
             name: person.name,
