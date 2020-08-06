@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './PlanetDetails.css';
+import './Planet.css';
 import ErrorButton from '../ErrorButton/ErrorButton';
 import SwapiService from "../../services/api";
 
@@ -39,7 +39,7 @@ export default class PlanetDetails extends Component {
     if (!this.state.planet) {
       return (
           <div>
-            <p>Select a person from a list</p>
+            <p>Select a planetfrom a list</p>
           </div>
       );
     }

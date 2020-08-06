@@ -15,6 +15,7 @@ export default class ItemList extends Component {
 
       this.props.getData()
           .then((itemsList) => {
+              console.log(itemsList);
               this.setState({
                   itemsList
               });
@@ -22,9 +23,11 @@ export default class ItemList extends Component {
       };
 
   renderItems(arr) {
-      return arr.map(({ id, name}) => {
+      return arr.map((item) => {
+          const { id } = item;
+          const label = this.props.renderItem(item);
           return (
-              <Item key={id} id={id} name={name} onItemSelected={this.props.onItemSelected} />
+              <li key={id} className="list-group-item">{label}</li>
           )
       })
   }
@@ -47,3 +50,6 @@ export default class ItemList extends Component {
 
   }
 }
+
+
+/* <Item key={idKey} id={idKey} label={label} onItemSelected={this.props.onItemSelected}/> */

@@ -3,8 +3,12 @@ import './Item.css';
 
 export default class Item extends Component {
   render() {
-    const { id, name, onItemSelected } = this.props;
+    const { id, label } = this.props;
 
-    return <li className="list-group-item list-group-item-action" onClick={() => {onItemSelected(id)}}>{name}</li>;
+    return (
+        <li className="list-group-item list-group-item-action"
+               onClick={() => {this.props.onItemSelected(id)}}>
+          {label}
+        </li>);
   }
 }

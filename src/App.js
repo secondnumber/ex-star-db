@@ -2,27 +2,23 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import RandomPlanet from './components/RandomPlanet/RandomPlanet';
-import ItemList from './components/ItemList/ItemList';
-import PersonDetails from './components/PersonDetails/PersonDetails';
-import ErrorButton from './components/ErrorButton/ErrorButton';
 import ErrorIndicator from './components/ErrorIndicator/ErrorIndicator';
-import PlanetDetails from './components/PlanetDetails/PlanetDetails';
-import StarshipDetails from './components/StarshipDetails/StarshipDetails';
 import {Universe} from './components/Test';
 import SwapiService from './services/api';
 import PersonPage from "./components/PersonDetails/PersonPage";
+import PlanetsPage from "./components/PlanetDetails/PlanetsPage";
+import StarshipsPage from "./components/StarshipDetails/StarshipsPage";
 
 export default class App extends Component {
 
     swapiService = new SwapiService();
 
     state = {
-        selectedItem: 4,
+        selectedItem: 5,
         hasError: false,
     };
 
     onItemSelected = (id) => {
-        debugger
         this.setState({
             selectedItem: id
         })
@@ -46,13 +42,22 @@ export default class App extends Component {
                 <PersonPage
                     onItemSelected={this.onItemSelected}
                     getData={this.swapiService.getAllPeople}
-                    personId={selectedItem}/>
+                    personId={selectedItem}
+                    renderItem={({name, gender, mass}) => `${name} ${gender} ${mass}`}
+                />
+                <PlanetsPage
+                    onItemSelected={this.onItemSelected}
+                    getData={this.swapiService.getAllPlanets}
+                    planetId={selectedItem}
+                    renderItem={({name, population}) => `${name} ${population}`}
+                />
+                <StarshipsPage
+                    onItemSelected={this.onItemSelected}
+                    getData={this.swapiService.getAllStarships}
+                    planetId={selectedItem}
+                    renderItem={({name}) => `${name}`}
+                />
             </div>
         );
   }
 }
-
-/*<ItemList onItemSelected={this.onItemSelected} getData={this.swapiService.getAllPlanets}/>
-<PlanetDetails planetId={selectedItem}/>
-<ItemList onItemSelected={this.onItemSelected} getData={this.swapiService.getAllStarships}/>
-<StarshipDetails starshipId={selectedItem}/>*/

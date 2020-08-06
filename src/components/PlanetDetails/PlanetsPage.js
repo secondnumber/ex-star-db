@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './Person.css';
-import PersonDetails from './PersonDetails';
+import './Planet.css';
+import PlanetDetails from './PlanetDetails';
 import ItemList from '../ItemList/ItemList';
 
-export default class PersonPage extends Component {
+export default class PlanetsPage extends Component {
 
     render() {
         return (
@@ -14,9 +14,8 @@ export default class PersonPage extends Component {
                     personId={this.props.personId}
                     renderItem={this.props.renderItem}
                 />
-                <PersonDetails personId={this.props.personId}/>
+                <PlanetDetails planetId={this.props.planetId}/>
             </div>
         );
     }
 }
-

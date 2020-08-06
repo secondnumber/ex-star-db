@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './StarshipDetails.css';
+import './Starship.css';
 import ErrorButton from '../ErrorButton/ErrorButton';
 import SwapiService from "../../services/api";
 
@@ -40,7 +40,7 @@ export default class StarshipDetails extends Component {
     if (!this.state.starship) {
       return (
           <div>
-            <p>Select a person from a list</p>
+            <p>Select a starship from a list</p>
           </div>
       );
     }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './Person.css';
-import PersonDetails from './PersonDetails';
+import './Starship.css';
+import StarshipDetails from './StarshipDetails';
 import ItemList from '../ItemList/ItemList';
 
-export default class PersonPage extends Component {
+export default class StarchipsPage extends Component {
 
     render() {
         return (
@@ -11,12 +11,11 @@ export default class PersonPage extends Component {
                 <ItemList
                     onItemSelected={this.props.onItemSelected}
                     getData={this.props.getData}
-                    personId={this.props.personId}
+                    starshipId={this.props.starshipId}
                     renderItem={this.props.renderItem}
                 />
-                <PersonDetails personId={this.props.personId}/>
+                <StarshipDetails starshipId={this.props.starshipId}/>
             </div>
         );
     }
 }
-
