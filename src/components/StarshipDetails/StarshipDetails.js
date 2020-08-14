@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Starship.css';
-import ErrorButton from '../ErrorButton/ErrorButton';
+import ErrorButton from '../ErrorBoundry/ErrorButton/ErrorButton';
 import SwapiService from "../../services/api";
 
 export default class StarshipDetails extends Component {

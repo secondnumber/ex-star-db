@@ -42,7 +42,7 @@ export default class PersonDetails extends Component {
             );
         }
 
-        const { id, name, gender, birthYear, eyeColor } = this.state.person;
+        const { id, name, gender, mass, height, birthYear, eyeColor, skinColor, hairColor } = this.state.person;
 
 
     return (
@@ -53,7 +53,11 @@ export default class PersonDetails extends Component {
                 <ul className="list-group item-info">
                   <li className="list-group-item">Gender: {gender ? `${gender}` : 'n/a'}</li>
                   <li className="list-group-item">Birth year: {birthYear ? `${birthYear}` : 'n/a'}</li>
+                  <li className="list-group-item">Mass: {mass ? `${mass}` : 'n/a'}</li>
+                  <li className="list-group-item">Height: {height ? `${height}` : 'n/a'}</li>
                   <li className="list-group-item">Eye color: {eyeColor ? `${eyeColor}` : 'n/a'}</li>
+                  <li className="list-group-item">Skin color: {skinColor ? `${skinColor}` : 'n/a'}</li>
+                  <li className="list-group-item">Hair color: {hairColor ? `${hairColor}` : 'n/a'}</li>
                 </ul>
             </div>
       </div>

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './ItemList.css';
-import SwapiService from "../../services/api";
-import Spinner from "../Spinner/Spinner";
-import Item from "./Item/Item";
+import SwapiService from '../../services/api';
+import Spinner from '../Spinner/Spinner';
+import Item from './Item/Item';
 
 export default class ItemList extends Component {
-
   state = {
       itemsList: null
   };
@@ -15,7 +14,6 @@ export default class ItemList extends Component {
 
       this.props.getData()
           .then((itemsList) => {
-              console.log(itemsList);
               this.setState({
                   itemsList
               });
@@ -24,10 +22,11 @@ export default class ItemList extends Component {
 
   renderItems(arr) {
       return arr.map((item) => {
-          const { id } = item;
+          const idRegExp = /\/([0-9]*)\/$/;
+          const id  = item.url.match(idRegExp)[1];
           const label = this.props.renderItem(item);
           return (
-              <li key={id} className="list-group-item">{label}</li>
+              <Item key={id} className="list-group-item" id={id} label={label} onItemSelected={this.props.onItemSelected}/>
           )
       })
   }

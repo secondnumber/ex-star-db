@@ -53,7 +53,11 @@ export default class SwapiService {
             name: planet.name,
             population: planet.population,
             rotationPeriod: planet.rotation_period,
-            diameter: planet.diameter
+            orbitalPeriod: planet.orbital_period,
+            diameter: planet.diameter,
+            climate: planet.climate,
+            gravity: planet.gravity,
+            terrain: planet.terrain,
         }
     }
 
@@ -72,12 +76,17 @@ export default class SwapiService {
     }
 
     _transformPerson = (person) => {
+        debugger
         return {
             id: this._extractId(person),
             name: person.name,
             gender: person.gender,
-            birthYear: person.birthYear,
-            eyeColor: person.eyeColor
+            birthYear: person.birth_year,
+            height: person.height,
+            mass: person.mass,
+            eyeColor: person.eye_color,
+            skinColor: person.skin_color,
+            hairColor: person.hair_color,
         }
     }
 }
