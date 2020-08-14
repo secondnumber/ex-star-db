@@ -1,5 +1,6 @@
 .content-block {
-    background-color: #303030;
+    margin: 0 auto;
+    background-color: #4E5D6C;
     border-radius: 5px;
 }
 
@@ -8,4 +9,9 @@
     height: 200px;
     width: auto;
     border-radius: 10px;
+}
+
+.caption-header{
+    width: 100%;
+    text-align: center;
 }

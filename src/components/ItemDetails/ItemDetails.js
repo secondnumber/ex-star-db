@@ -1,53 +1,57 @@
 import React, { Component } from 'react';
-import './Person.css';
+import './ItemDetails.css';
 import SwapiService from '../../services/api';
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
     swapiService = new SwapiService();
 
     state = {
-        person: null
+        item: null,
+        image: null,
     };
 
     componentDidMount() {
-        this.updatePerson();
+        this.updateItem();
     }
 
     componentDidUpdate(prevProps) {
         if (this.props !== prevProps)  {
-            this.updatePerson();
+            this.updateItem();
         }
     }
 
-    updatePerson() {
-        const { personId } = this.props;
-        if (!personId) {
+    updateItem() {
+        const { itemId, getData, getImage } = this.props;
+
+        if (!itemId) {
             return;
         }
-            this.swapiService
-               .getPerson(personId)
-               .then((person) => {
+               getData(itemId)
+               .then((item) => {
+                   const url = getImage(item);
                    this.setState({
-                       person
+                       item,
+                       image: url,
                    })
                })
     }
 
     render() {
-        if (!this.state.person) {
+
+        if (!this.state.item) {
             return (
                 <div>
-                    <p>Select a person from a list</p>
+                    <p>Select item from a list</p>
                 </div>
             );
         }
 
-        const { id, name, gender, mass, height, birthYear, eyeColor, skinColor, hairColor } = this.state.person;
-
+        const { id, name, gender, mass, height, birthYear, eyeColor, skinColor, hairColor } = this.state.item;
+        const { image } = this.state;
 
     return (
       <div className="d-flex content-block col-8">
-            <img className="item-image m-3" src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt={`${name}`}/>
+            <img className="item-image m-3" src={image} alt={`${name}`}/>
             <div className="d-flex flex-column m-3">
                 <h3 className="item-header">{name}</h3>
                 <ul className="list-group item-info">

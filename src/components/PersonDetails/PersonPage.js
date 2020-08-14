@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import './Person.css';
 import PersonDetails from './PersonDetails';
 import ItemList from '../ItemList/ItemList';
-import ErrorBoundry from '../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 export default class PersonPage extends Component {
     render() {
         return (
-            <ErrorBoundry>
+            <ErrorBoundary>
             <div className='item-block row'>
                 <ItemList
                     onItemSelected={this.props.onItemSelected}
@@ -17,7 +17,7 @@ export default class PersonPage extends Component {
                 />
                 <PersonDetails personId={this.props.personId}/>
             </div>
-            </ErrorBoundry>
+            </ErrorBoundary>
         );
     }
 }

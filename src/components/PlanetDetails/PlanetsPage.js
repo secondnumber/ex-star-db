@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import './Planet.css';
 import PlanetDetails from './PlanetDetails';
 import ItemList from '../ItemList/ItemList';
-import ErrorBoundry from "../ErrorBoundry/ErrorBoundry";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 export default class PlanetsPage extends Component {
 
     render() {
         return (
-            <ErrorBoundry>
+            <ErrorBoundary>
             <div className='item-block row'>
                 <ItemList
                     onItemSelected={this.props.onItemSelected}
@@ -18,7 +18,7 @@ export default class PlanetsPage extends Component {
                 />
                 <PlanetDetails planetId={this.props.planetId}/>
             </div>
-            </ErrorBoundry>
+            </ErrorBoundary>
         );
     }
 }

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import './Starship.css';
 import StarshipDetails from './StarshipDetails';
 import ItemList from '../ItemList/ItemList';
-import ErrorBoundry from '../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 export default class StarchipsPage extends Component {
 
     render() {
         return (
-            <ErrorBoundry>
+            <ErrorBoundary>
             <div className='item-block row'>
                 <ItemList
                     onItemSelected={this.props.onItemSelected}
@@ -18,7 +18,7 @@ export default class StarchipsPage extends Component {
                 />
                 <StarshipDetails starshipId={this.props.starshipId}/>
             </div>
-            </ErrorBoundry>
+            </ErrorBoundary>
         );
     }
 }

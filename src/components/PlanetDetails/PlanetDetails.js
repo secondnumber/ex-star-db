@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Planet.css';
-import ErrorButton from '../ErrorBoundry/ErrorButton/ErrorButton';
+import ErrorButton from '../ErrorBoundary/ErrorButton/ErrorButton';
 import SwapiService from "../../services/api";
 
 export default class PlanetDetails extends Component {
@@ -48,10 +48,10 @@ export default class PlanetDetails extends Component {
 
 
     return (
-        <div className="d-flex person-block col-8">
+        <div className="d-flex content-block col-8">
           <img className="item-image m-3" src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={`${name}`}/>
           <div className="d-flex flex-column m-3">
-            <h3>{name}</h3>
+            <h3 className="item-header">{name}</h3>
             <ul className="list-group">
                 <li className="list-group-item">Population: {population}</li>
                 <li className="list-group-item">Rotation period: {rotationPeriod}</li>

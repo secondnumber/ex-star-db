@@ -7,11 +7,12 @@ import {
 import './App.css';
 import Header from './components/Header/Header';
 import RandomPlanet from './components/RandomPlanet/RandomPlanet';
-import ErrorIndicator from './components/ErrorBoundry/ErrorIndicator/ErrorIndicator';
+import ErrorIndicator from './components/ErrorBoundary/ErrorIndicator/ErrorIndicator';
 import SwapiService from './services/api';
 import PersonPage from './components/PersonDetails/PersonPage';
 import PlanetsPage from './components/PlanetDetails/PlanetsPage';
 import StarshipsPage from './components/StarshipDetails/StarshipsPage';
+import ItemDetails from "./components/ItemDetails/ItemDetails";
 
 export default class App extends Component {
 
@@ -35,6 +36,8 @@ export default class App extends Component {
     }
 
     render() {
+        const { getPerson, getStarship, getPersonImage, getStarshipImage, getPlanetImage } = this.swapiService;
+
         const {selectedItem} = this.state;
 
         if (this.state.hasError) {
@@ -45,32 +48,8 @@ export default class App extends Component {
             <div>
                 <Header />
                 <RandomPlanet />
-                <Switch>
-                <Route exact path="/">
-                <PersonPage
-                    onItemSelected={this.onItemSelected}
-                    getData={this.swapiService.getAllPeople}
-                    personId={selectedItem}
-                    renderItem={({name}) => `${name}`}
-                />
-                </Route>
-                <Route exact path="/planets">
-                <PlanetsPage
-                    onItemSelected={this.onItemSelected}
-                    getData={this.swapiService.getAllPlanets}
-                    planetId={selectedItem}
-                    renderItem={({name}) => `${name}`}
-                />
-                </Route>
-                <Route exact path="/starships">
-                    <StarshipsPage
-                        onItemSelected={this.onItemSelected}
-                        getData={this.swapiService.getAllStarships}
-                        starshipId={selectedItem}
-                        renderItem={({name}) => `${name}`}
-                    />
-                </Route>
-                </Switch>
+                <ItemDetails itemId={11} getData={getPerson} getImage={getPersonImage} />
+                <ItemDetails itemId={5} getData={getStarship} getImage={getStarshipImage} />
             </div>
             </Router>
         );
