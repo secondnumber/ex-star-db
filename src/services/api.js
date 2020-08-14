@@ -1,6 +1,7 @@
 export default class SwapiService {
 
     _apiBaseUrl = 'https://swapi.dev/api';
+    _imageBase = 'https://starwars-visualguide.com/assets/img/';
 
     getResource = async (url) => {
         const responce = await fetch(`${this._apiBaseUrl}${url}`);
@@ -11,17 +12,17 @@ export default class SwapiService {
     }
 
     getAllPeople = async () => {
-        const responce = await this.getResource(`/people/`);
+        const responce = await this.getResource('/people/');
         return responce.results;
     }
 
     getAllPlanets = async () => {
-        const responce = await this.getResource(`/planets/`);
+        const responce = await this.getResource('/planets/');
         return responce.results;
     }
 
     getAllStarships = async () => {
-        const responce = await this.getResource(`/starships/`);
+        const responce = await this.getResource('/starships/');
         return responce.results;
     }
 
@@ -41,6 +42,18 @@ export default class SwapiService {
         return this._transformPlanet(planet, imageUrl);
     }
 
+    getPersonImage = ({id}) => {
+        return `${this._imageBase}characters/${id}.jpg`
+    }
+
+    getStarshipImage = ({id}) => {
+        return `${this._imageBase}starships/${id}.jpg`
+    }
+
+    getPlanetImage = ({id}) => {
+        return `${this._imageBase}planets/${id}.jpg`
+    }
+
     _extractId = (item) => {
         const idRegExp = /\/([0-9]*)\/$/;
         return item.url.match(idRegExp)[1];
@@ -53,7 +66,11 @@ export default class SwapiService {
             name: planet.name,
             population: planet.population,
             rotationPeriod: planet.rotation_period,
-            diameter: planet.diameter
+            orbitalPeriod: planet.orbital_period,
+            diameter: planet.diameter,
+            climate: planet.climate,
+            gravity: planet.gravity,
+            terrain: planet.terrain,
         }
     }
 
@@ -61,9 +78,11 @@ export default class SwapiService {
         return {
             id: this._extractId(starship),
             name: starship.name,
+            mglt: starship.MGLT,
             model: starship.model,
             manufactured: starship.manufactured,
-            costInCredits: starship.costInCredits,
+            costInCredits: starship.cost_in_credits,
+            hyperdriveRating: starship.hyperdrive_rating,
             length: starship.length,
             crew: starship.crew,
             passengers: starship.passengers,
@@ -72,12 +91,17 @@ export default class SwapiService {
     }
 
     _transformPerson = (person) => {
+        debugger
         return {
             id: this._extractId(person),
             name: person.name,
             gender: person.gender,
-            birthYear: person.birthYear,
-            eyeColor: person.eyeColor
+            birthYear: person.birth_year,
+            height: person.height,
+            mass: person.mass,
+            eyeColor: person.eye_color,
+            skinColor: person.skin_color,
+            hairColor: person.hair_color,
         }
     }
 }

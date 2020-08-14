@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import RandomPlanet from './components/RandomPlanet/RandomPlanet';
-import ItemList from './components/ItemList/ItemList';
-import PersonDetails from './components/PersonDetails/PersonDetails';
-import ErrorButton from './components/ErrorButton/ErrorButton';
-import ErrorIndicator from './components/ErrorIndicator/ErrorIndicator';
-import PlanetDetails from './components/PlanetDetails/PlanetDetails';
-import StarshipDetails from './components/StarshipDetails/StarshipDetails';
-import {Universe} from './components/Test';
+import ErrorIndicator from './components/ErrorBoundary/ErrorIndicator/ErrorIndicator';
 import SwapiService from './services/api';
-import PersonPage from "./components/PersonDetails/PersonPage";
+import PersonPage from './components/PersonDetails/PersonPage';
+import PlanetsPage from './components/PlanetDetails/PlanetsPage';
+import StarshipsPage from './components/StarshipDetails/StarshipsPage';
+import ItemDetails from "./components/ItemDetails/ItemDetails";
 
 export default class App extends Component {
 
     swapiService = new SwapiService();
 
     state = {
-        selectedItem: 4,
+        selectedItem: null,
         hasError: false,
     };
 
     onItemSelected = (id) => {
-        debugger
         this.setState({
             selectedItem: id
         })
@@ -35,24 +36,22 @@ export default class App extends Component {
     }
 
     render() {
+        const { getPerson, getStarship, getPersonImage, getStarshipImage, getPlanetImage } = this.swapiService;
+
         const {selectedItem} = this.state;
+
         if (this.state.hasError) {
             return <ErrorIndicator />
         }
         return (
+            <Router>
             <div>
                 <Header />
                 <RandomPlanet />
-                <PersonPage
-                    onItemSelected={this.onItemSelected}
-                    getData={this.swapiService.getAllPeople}
-                    personId={selectedItem}/>
+                <ItemDetails itemId={11} getData={getPerson} getImage={getPersonImage} />
+                <ItemDetails itemId={5} getData={getStarship} getImage={getStarshipImage} />
             </div>
+            </Router>
         );
   }
 }
-
-/*<ItemList onItemSelected={this.onItemSelected} getData={this.swapiService.getAllPlanets}/>
-<PlanetDetails planetId={selectedItem}/>
-<ItemList onItemSelected={this.onItemSelected} getData={this.swapiService.getAllStarships}/>
-<StarshipDetails starshipId={selectedItem}/>*/
