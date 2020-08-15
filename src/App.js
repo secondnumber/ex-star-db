@@ -12,7 +12,8 @@ import SwapiService from './services/api';
 import PersonPage from './components/PersonDetails/PersonPage';
 import PlanetsPage from './components/PlanetDetails/PlanetsPage';
 import StarshipsPage from './components/StarshipDetails/StarshipsPage';
-import ItemDetails from "./components/ItemDetails/ItemDetails";
+import ItemDetails, {Record} from "./components/ItemDetails/ItemDetails";
+import ItemList from "./components/ItemList/ItemList";
 
 export default class App extends Component {
 
@@ -36,7 +37,7 @@ export default class App extends Component {
     }
 
     render() {
-        const { getPerson, getStarship, getPersonImage, getStarshipImage, getPlanetImage } = this.swapiService;
+        const { getAllPeople, getPerson, getStarship, getPlanet, getPersonImage, getStarshipImage, getPlanetImage } = this.swapiService;
 
         const {selectedItem} = this.state;
 
@@ -48,8 +49,36 @@ export default class App extends Component {
             <div>
                 <Header />
                 <RandomPlanet />
-                <ItemDetails itemId={11} getData={getPerson} getImage={getPersonImage} />
-                <ItemDetails itemId={5} getData={getStarship} getImage={getStarshipImage} />
+                <ItemList
+                    getData={getAllPeople}
+                    onItemSelected={this.onItemSelected}
+                >
+                    {({name}) => <span>{name}</span>}
+                </ItemList>
+                <ItemDetails
+                    itemId={11}
+                    getData={getPerson}
+                    getImage={getPersonImage}
+                >
+                 <Record field="gender" label="Gender" />
+                 <Record field="eyeColor" label="Eye color" />
+                </ItemDetails>
+                <ItemDetails
+                    itemId={5}
+                    getData={getStarship}
+                    getImage={getStarshipImage}
+                >
+                    <Record field="model" label="Model" />
+                    <Record field="length" label="Length" />
+                </ItemDetails>
+                <ItemDetails
+                    itemId={4}
+                    getData={getPlanet}
+                    getImage={getPlanetImage}
+                    >
+                    <Record field="mass" label="Mass" />
+                    <Record field="population" label="Population" />
+                </ItemDetails>
             </div>
             </Router>
         );
