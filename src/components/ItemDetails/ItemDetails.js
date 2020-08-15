@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import './ItemDetails.css';
 import SwapiService from '../../services/api';
 
+export const Record = ({item, field, label}) => {
+    return (
+        <li className="list-group-item">{label}: {item[field]}</li>
+    )
+}
+
 export default class ItemDetails extends Component {
     swapiService = new SwapiService();
 
@@ -45,8 +51,8 @@ export default class ItemDetails extends Component {
                 </div>
             );
         }
-
-        const { id, name, gender, mass, height, birthYear, eyeColor, skinColor, hairColor } = this.state.item;
+        const { item } = this.state;
+        const { id, name, gender, mass, height, birthYear, eyeColor, skinColor, hairColor } = item;
         const { image } = this.state;
 
     return (
@@ -55,13 +61,11 @@ export default class ItemDetails extends Component {
             <div className="d-flex flex-column m-3">
                 <h3 className="item-header">{name}</h3>
                 <ul className="list-group item-info">
-                  <li className="list-group-item">Gender: {gender ? `${gender}` : 'n/a'}</li>
-                  <li className="list-group-item">Birth year: {birthYear ? `${birthYear}` : 'n/a'}</li>
-                  <li className="list-group-item">Mass: {mass ? `${mass}` : 'n/a'}</li>
-                  <li className="list-group-item">Height: {height ? `${height}` : 'n/a'}</li>
-                  <li className="list-group-item">Eye color: {eyeColor ? `${eyeColor}` : 'n/a'}</li>
-                  <li className="list-group-item">Skin color: {skinColor ? `${skinColor}` : 'n/a'}</li>
-                  <li className="list-group-item">Hair color: {hairColor ? `${hairColor}` : 'n/a'}</li>
+                    {
+                        React.Children.map(this.props.children, (child) => {
+                          return React.cloneElement(child, {item});
+                        })
+                    }
                 </ul>
             </div>
       </div>
